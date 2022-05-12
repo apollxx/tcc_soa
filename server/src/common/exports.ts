@@ -9,3 +9,8 @@ export * from './middlewares/current-user';
 export * from './middlewares/error-handler';
 export * from './middlewares/require-auth';
 export * from './middlewares/validate-request';
+export * from './middlewares/auth-client'
+export * from './middlewares/auth-provider'
+
+export * from "./interfaces/roles"
+export * from "./interfaces/user-payload"

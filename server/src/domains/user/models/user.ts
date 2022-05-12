@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
+import { Roles } from '../../../common/interfaces/roles'
 import { Password } from "../services/password";
 
 // Interface that describes the props 
 // required to create (build) a new user
 interface UserAttrs {
     email: string;
-    password: string
+    password: string;
+    role: Roles;
+    name: string,
+    phone?: string,
+    address?: string,
 }
 
 // An interface that describes the props
@@ -16,9 +21,13 @@ interface UserModel extends mongoose.Model<UserDoc> {
 
 // Interface that desribe the props
 // that a User Document has (specific to document)
-interface UserDoc extends mongoose.Document {
+export interface UserDoc extends mongoose.Document {
     email: string;
     password: string;
+    role: Roles;
+    name: string,
+    phone?: string,
+    address?: string,
 }
 
 const userSchema = new mongoose.Schema({
@@ -29,7 +38,17 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    role: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    phone: String,
+    address: String
 }, {
     toJSON: {
         transform(doc, ret) {

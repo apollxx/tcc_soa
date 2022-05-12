@@ -1,10 +1,9 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken';
 import { validateRequest, BadRequestError } from '../../../common/exports';
-
 import { Password } from '../services/password';
 import { User } from '../models/user';
+import { genUserJwt } from '../services/gen-user-jwt';
 
 const router = express.Router();
 
@@ -35,13 +34,7 @@ router.post(
     }
 
     // Generate JWT
-    const userJwt = jwt.sign(
-      {
-        id: existingUser.id,
-        email: existingUser.email,
-      },
-      process.env.JWT_KEY!
-    );
+    const userJwt = genUserJwt(existingUser)
 
     // Store it on session object
     req.session = {

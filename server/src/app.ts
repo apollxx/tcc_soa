@@ -4,10 +4,11 @@ import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError } from './common/exports';
 
-import { currentUserRouter } from './domains/auth/routes/current-user';
-import { signinRouter } from './domains/auth/routes/signin';
-import { signoutRouter } from './domains/auth/routes/signout';
-import { signupRouter } from './domains/auth/routes/signup';
+import { currentUserRouter } from './domains/user/routes/current-user';
+import { signinRouter } from './domains/user/routes/signin';
+import { signoutRouter } from './domains/user/routes/signout';
+import { signupRouter } from './domains/user/routes/signup';
+
 
 const app = express();
 app.set('trust proxy', true)
@@ -19,7 +20,6 @@ app.use(
     })
 )
 
-// auth
 app.use([currentUserRouter, signinRouter, signinRouter, signoutRouter, signupRouter]);
 
 app.all("*", async () => {

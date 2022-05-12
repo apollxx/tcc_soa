@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
 import { body } from 'express-validator';
-import jwt from 'jsonwebtoken'
-
+import { Roles } from "../../../common/exports"
 import { validateRequest, BadRequestError } from "../../../common/exports";
 import { User } from "../models/user";
+import { genUserJwt } from "../services/gen-user-jwt";
 
 
 const router = express.Router();
@@ -15,26 +15,28 @@ router.post('/api/users/signup', [
     body('password')
         .trim()
         .isLength({ min: 4, max: 20 })
-        .withMessage("Password must be between 4 and 20 characters")
+        .withMessage("Password must be between 4 and 20 characters"),
+    body("role")
+        .trim()
+        .isIn([Roles.Client, Roles.Provider])
+        .withMessage("Role must be an Enum of Roles"),
+    body("name")
+        .notEmpty()
+        .withMessage("You must supply a name")
 ], validateRequest,
     async (req: Request, res: Response) => {
 
-        const { email, password } = req.body;
+        const { email, password, role, name, phone, address } = req.body;
 
         const existingUser = await User.findOne({ email });
 
         if (existingUser) throw new BadRequestError("Email in use")
 
-
-        const user = User.build({ email, password });
+        const user = User.build({ email, password, role, name, phone, address });
         await user.save();
 
         // Generate JWT
-        const userJwt = jwt.sign({
-            id: user.id,
-            email: user.email
-        }, process.env.JWT_KEY!
-        );
+        const userJwt = genUserJwt(user)
 
         // Store it on session
         req.session = {
