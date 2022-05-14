@@ -14,3 +14,8 @@ export * from './middlewares/auth-provider'
 
 export * from "./interfaces/roles"
 export * from "./interfaces/user-payload"
+export * from "./interfaces/order-status"
+
+export * from "./customValidators/isObjectId"
+
+export * from "./auxiliar/isOfEnum";

@@ -8,9 +8,9 @@ interface UserAttrs {
     email: string;
     password: string;
     role: Roles;
-    name: string,
-    phone?: string,
-    address?: string,
+    name: string;
+    phone?: string;
+    address?: string;
 }
 
 // An interface that describes the props
@@ -19,7 +19,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
     build(attrs: UserAttrs): UserDoc;
 }
 
-// Interface that desribe the props
+// Interface that describe the props
 // that a User Document has (specific to document)
 export interface UserDoc extends mongoose.Document {
     email: string;
