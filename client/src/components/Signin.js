@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
 import { Container, TextField, Button } from "@mui/material";
+import { endpoints } from "../endpoints";
 
 export default function Signin() {
     const [email, setEmail] = useState('');
@@ -8,7 +9,7 @@ export default function Signin() {
 
     const onSubmit = async event => {
         try {
-            await axios.post("api/users/signin", { email, password })
+            await axios.post(endpoints.post.users.signin, { email, password })
             window.location.href = "/"
         } catch (ex) {
 

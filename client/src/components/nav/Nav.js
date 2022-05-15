@@ -11,12 +11,11 @@ import NavButton from './NavButton';
 export default function Nav() {
     const navigate = useNavigate();
     const user = useContext(UserContext);
-    console.log(user)
     const links = [
-        !user && <NavButton navigateTo={'/signup'} text={'Sign Up'} />,
-        !user && <NavButton navigateTo={'/signin'} text={'Sign In'} />,
-        user && <NavButton navigateTo={"/signout"} text={"Sign Out"} />,
-
+        !user && <NavButton key={'signup'} navigateTo={'/users/signup'} text={'Sign Up'} />,
+        !user && <NavButton key={'singin'} navigateTo={'/users/signin'} text={'Sign In'} />,
+        user && user.role === "provider" && <NavButton key={'newproduct'} navigateTo={"/products/new"} text={"Register Product"} />,
+        user && <NavButton key={'signout'} navigateTo={"/users/signout"} text={"Sign Out"} />,
     ]
 
     return (

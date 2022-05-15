@@ -8,9 +8,10 @@ import { currentUserRouter } from './domains/users/routes/current-user';
 import { signinRouter } from './domains/users/routes/signin';
 import { signoutRouter } from './domains/users/routes/signout';
 import { signupRouter } from './domains/users/routes/signup';
+import { indexProviderRouter } from './domains/users/routes/indexProvider';
 
 import { newProductRouter } from './domains/products/routes/new';
-import { indexProductRouter } from './domains/products/routes';
+import { indexProductProviderRouter } from './domains/products/routes/indexProvider';
 
 import { newOrderRouter } from './domains/orders/routes/new';
 import { indexOrderUserRouter } from './domains/orders/routes/indexUser';
@@ -26,8 +27,8 @@ app.use(
     })
 )
 
-app.use([currentUserRouter, signinRouter, signinRouter, signoutRouter, signupRouter]);
-app.use([newProductRouter, indexProductRouter])
+app.use([currentUserRouter, signinRouter, signinRouter, signoutRouter, signupRouter, indexProviderRouter]);
+app.use([newProductRouter, indexProductProviderRouter])
 app.use([newOrderRouter, indexOrderUserRouter, updateOrderRouter])
 
 app.all("*", async () => {
