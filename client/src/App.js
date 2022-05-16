@@ -10,6 +10,8 @@ import Signout from './components/Signout';
 import { IndexProvider } from "./components/IndexProviders";
 import { NewProduct } from './components/NewProduct'
 import { IndexProviderProducts } from "./components/IndexProviderProducts"
+import { ShowProduct } from "./components/ShowProduct"
+import { OrderIndexUser } from "./components/OrderIndexUser";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -33,7 +35,9 @@ function App() {
           <Route exact path='/users/signup' element={<Signup />} />
           <Route exact path='/users/signout' element={<Signout />} />
           <Route exact path='/products/new' element={<NewProduct />} />
-          <Route exact path='/products/provider/:providerId' element={<IndexProviderProducts />} />
+          <Route exact path='/products/provider/:id' element={<IndexProviderProducts />} />
+          <Route exact path='/products/:id' element={<ShowProduct />} />
+          <Route exact path='/orders/:status' element={<OrderIndexUser />} />
         </Routes>
       </Router>
     </UserContext.Provider>

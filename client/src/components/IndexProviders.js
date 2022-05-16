@@ -23,11 +23,14 @@ export function IndexProvider() {
             <List>
                 {providers.map(provider => {
                     return (
-                        <ListItem disablePadding>
-                            <ListItemButton onClick={() => { navigate("/users/signup") }}>
-                                <ListItemText primary={provider.name} />
-                            </ListItemButton>
-                        </ListItem>
+                        <React.Fragment>
+                            <ListItem key={provider.id} disablePadding style={{ backgroundColor: "#ec8275" }}>
+                                <ListItemButton onClick={() => { navigate("/products/provider/" + provider.id) }}>
+                                    <ListItemText primary={provider.name} />
+                                </ListItemButton>
+                            </ListItem>
+                            <hr></hr>
+                        </React.Fragment>
                     )
                 })}
             </List>

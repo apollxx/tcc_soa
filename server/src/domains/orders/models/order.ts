@@ -5,6 +5,7 @@ import { OrderStatus } from "../../../common/exports"
 export interface OrderAttrs {
     clientId: Types.ObjectId,
     providerId: Types.ObjectId,
+    providerName: string;
     products: [{
         id: Types.ObjectId,
         title: string,
@@ -17,6 +18,7 @@ export interface OrderAttrs {
 interface OrderDoc extends mongoose.Document {
     clientId: Types.ObjectId,
     providerId: Types.ObjectId,
+    providerName: string
     products: [{
         id: Types.ObjectId,
         title: string,
@@ -38,6 +40,10 @@ const orderSchema = new mongoose.Schema({
     },
     providerId: {
         type: Types.ObjectId,
+        required: true
+    },
+    providerName: {
+        type: String,
         required: true
     },
     products: [{

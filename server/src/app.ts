@@ -9,13 +9,17 @@ import { signinRouter } from './domains/users/routes/signin';
 import { signoutRouter } from './domains/users/routes/signout';
 import { signupRouter } from './domains/users/routes/signup';
 import { indexProviderRouter } from './domains/users/routes/indexProvider';
+import { showProviderRouter } from './domains/users/routes/show-provider';
 
 import { newProductRouter } from './domains/products/routes/new';
 import { indexProductProviderRouter } from './domains/products/routes/indexProvider';
+import { showProductRouter } from './domains/products/routes/show';
 
 import { newOrderRouter } from './domains/orders/routes/new';
 import { indexOrderUserRouter } from './domains/orders/routes/indexUser';
 import { updateOrderRouter } from './domains/orders/routes/update';
+import { showOrderUserRouter } from './domains/orders/routes/showProvider';
+import { orderUpdateCompleted } from './domains/orders/routes/updateCompleted';
 
 const app = express();
 app.set('trust proxy', true)
@@ -27,9 +31,9 @@ app.use(
     })
 )
 
-app.use([currentUserRouter, signinRouter, signinRouter, signoutRouter, signupRouter, indexProviderRouter]);
-app.use([newProductRouter, indexProductProviderRouter])
-app.use([newOrderRouter, indexOrderUserRouter, updateOrderRouter])
+app.use([currentUserRouter, signinRouter, signinRouter, signoutRouter, signupRouter, indexProviderRouter, showProviderRouter]);
+app.use([newProductRouter, indexProductProviderRouter, showProductRouter])
+app.use([newOrderRouter, indexOrderUserRouter, updateOrderRouter, showOrderUserRouter, orderUpdateCompleted])
 
 app.all("*", async () => {
     throw new NotFoundError;

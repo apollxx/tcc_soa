@@ -3,13 +3,16 @@ export const endpoints = {
     get: {
         users: {
             currentUser: baseUrl + "api/users/currentuser",
-            indexProviders: baseUrl + "api/users/providers"
+            indexProviders: baseUrl + "api/users/providers",
+            showProvider: (id) => { return baseUrl + "api/users/providers/" + id }
         },
         products: {
-            indexProvider: (id) => { return baseUrl + "api/products/provider/" + id }
+            indexProvider: (id) => { return baseUrl + "api/products/provider/" + id },
+            show: (id) => { return baseUrl + "api/products/" + id }
         },
         orders: {
-            indexUser: (param) => { return baseUrl + `api/orders/user/${param}` }
+            indexUser: (param) => { return baseUrl + `api/orders/user/${param}` },
+            showClient: (providerId) => { return baseUrl + "api/orders/client/" + providerId }
         }
     },
     post: {
@@ -27,7 +30,8 @@ export const endpoints = {
     },
     put: {
         orders: {
-            update: baseUrl + "api/orders"
+            update: baseUrl + "api/orders",
+            completeOrder: (id) => { return (baseUrl + "api/orders/" + id + "/completed") }
         }
     }
 }

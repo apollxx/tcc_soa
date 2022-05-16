@@ -19,7 +19,7 @@ router.post("/api/orders", currentUser, requireAuth, authClient, [
         .isInt({ min: 1, max: 100 })
         .withMessage("amount must be a int number greater or equal to 1")
 ], validateRequest, async (req: Request, res: Response) => {
-    const { providerId, productId, amount } = req.body
+    const { providerId, productId, amount, providerName } = req.body
     const clientId = req.currentUser!.id
 
     const foundedOrder = await Order.findByClientProvider(clientId, providerId)
@@ -32,6 +32,7 @@ router.post("/api/orders", currentUser, requireAuth, authClient, [
     const order = Order.build({
         clientId,
         providerId,
+        providerName,
         products: [{
             id: product.id,
             title: title,

@@ -15,6 +15,8 @@ export default function Nav() {
         !user && <NavButton key={'signup'} navigateTo={'/users/signup'} text={'Sign Up'} />,
         !user && <NavButton key={'singin'} navigateTo={'/users/signin'} text={'Sign In'} />,
         user && user.role === "provider" && <NavButton key={'newproduct'} navigateTo={"/products/new"} text={"Register Product"} />,
+        user && user.role === "client" && <NavButton key={'openorders'} navigateTo={"/orders/shopping"} text={"Open Orders"} />,
+        user && <NavButton key={'completedorders'} navigateTo={"/orders/completed"} text={"Completed Orders"} />,
         user && <NavButton key={'signout'} navigateTo={"/users/signout"} text={"Sign Out"} />,
     ]
 
